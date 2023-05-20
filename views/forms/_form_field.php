@@ -26,37 +26,34 @@ use unclead\multipleinput\renderers\ListRenderer;
         'enableGuessTitle' => true,
         'columns' => [
             [
-                'name'  => 'product_id',
+                'name'  => 'type',
                 'type'  => 'dropDownList',
-                'title' => 'Special Products',
-                'defaultValue' => 1,
+                'title' => 'Тип поля',
+                'defaultValue' => 'text',
+//                'enableError' => true,
                 'items' => [
-                    'text' => 'Техтовое поле',
-                    'date' => 'Поле дата',
+                    'text' => 'Текстовое поле',
+                    'data' => 'Поле дата',
+                    'textarea' => 'Поле несколько строк',
                 ],
             ],
             [
-                'name'  => 'count',
-                'title' => 'Count',
-                'defaultValue' => 1,
+                'name'  => 'name',
+                'title' => 'Название',
+//                'defaultValue' => 1,
                 'enableError' => true,
                 'options' => [
 //                    'type' => 'number',
+//                    'placeholder' => 'number',
                     'class' => 'input-priority',
                 ]
             ]
         ],
-//        'rowOptions' => function($model) {
-//            $options = [];
-//            if ($model['priority'] > 1) {
-//                $options['class'] = 'danger';
-//            }
-//            return $options;
-//        },
     ])
         ->label(false);
     ?>
 
+    <?= $form->field($model,'form_id')->hiddenInput(['value'=>$form_id])->label(false)?>
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>

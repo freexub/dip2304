@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 
+$rout = Yii::$app->controller->id;
+//var_dump($rout);die();
 ?>
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand-md navbar-dark navbar-dark">
@@ -9,10 +11,13 @@ use yii\helpers\Html;
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="<?=\yii\helpers\Url::home()?>" class="nav-link">Главная</a>
+                <a href="<?=\yii\helpers\Url::home()?>" class="nav-link <?=($rout=='site')? 'active': ''?>">Главная</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="/personal/index" class="nav-link">Сотрудники</a>
+                <a href="/personal/index" class="nav-link <?=($rout=='personal')? 'active': ''?>">Сотрудники</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="/forms/index" class="nav-link <?=($rout=='forms')? 'active': ''?>">Формы</a>
             </li>
         </ul>
 

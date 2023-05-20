@@ -9,7 +9,7 @@ use kartik\date\DatePicker;
 /* @var $formData yii\widgets\ActiveForm */
 //var_dump($form->formsFields);die();
 ?>
-<div class="card card-outline card-success">
+<div class="card card-outline card-success mb-0">
     <div class="card-header">
         <h3 class="card-title text-lx"><?=$formData->name?></h3>
     </div>
@@ -22,11 +22,14 @@ use kartik\date\DatePicker;
                         case 'text':
                             echo Html::input('text', 'Field['.$field->id.']', '', ['class' => 'form-control']);
                             break;
-                        case 'date':
+                        case 'textarea':
+                            echo Html::textArea('Field['.$field->id.']', '',['class' => 'form-control', 'rows'=>4]);
+                            break;
+                        case 'data':
                             echo DatePicker::widget([
-                                'name' => 'dp_1',
-                                'type' => DatePicker::TYPE_INPUT,
-                                'value' => '23-Feb-1982',
+                                'name' => 'Field['.$field->id.']',
+                                'type' => DatePicker::TYPE_COMPONENT_PREPEND,
+//                                'value' => '23-Feb-1982',
                                 'pluginOptions' => [
                                     'autoclose' => true,
                                     'format' => 'dd-M-yyyy'

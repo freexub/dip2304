@@ -58,13 +58,28 @@ class FormsFieldsData extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getAllForms()
+    {
+        return Forms::find()->where(['active' => 0])->all();
+    }
+
     public function getForms()
     {
         return $this->hasOne(Forms::className(), ['id' => 'form_id']);
     }
 
+    public function getPersonal()
+    {
+        return $this->hasOne(Personal::className(), ['id' => 'user_id']);
+    }
+
     public function getContentData()
     {
-        return implode(', <br>',(array)json_decode($this->content));
+        $fields = $this->forms->formsFields;
+        $arr = (array)json_decode($this->content);
+        foreach ($fields as $item){
+            $arr[$item->id] = '<strong>'.$item->name.': </strong>' . $arr[$item->id];
+        }
+        return implode(', <br>',$arr);
     }
 }

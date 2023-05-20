@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\FormsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Forms';
+$this->title = 'Формы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="forms-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Forms', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать новую форму', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,9 +25,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'name',
-            'active',
+//            'id',
+//            'name',
+            [
+                'attribute' => 'name',
+                'format' => 'raw',
+                'value' => function($data){
+                    return Html::a($data->name, ['history','id'=>$data->id]);
+                }
+            ],
+//            'active',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

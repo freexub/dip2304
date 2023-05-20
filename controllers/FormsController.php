@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\FormsFields;
+use app\models\FormsFieldsData;
+use app\models\FormsFieldsDataSearch;
 use Yii;
 use app\models\Forms;
 use app\models\FormsSearch;
@@ -46,6 +48,20 @@ class FormsController extends Controller
         ]);
     }
 
+    public function actionHistory($id)
+    {
+        $searchModel = new FormsFieldsDataSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['form_id'=>$id]);
+        $model = Forms::findOne($id);
+
+        return $this->render('history', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+        ]);
+    }
+
     /**
      * Displays a single Forms model.
      * @param integer $id
@@ -57,14 +73,15 @@ class FormsController extends Controller
         $modelField = new FormsFields();
         $fieldList = FormsFields::find()->where(['form_id'=>$id])->all();
         if (Yii::$app->request->post()){
+//            var_dump($_POST);die();
             foreach ($_POST['FormsFields']['name'] as $field){
-            $modelField->name = $field;
-            $modelField->form_id = $id;
-            $modelField->save();
-            $modelField->id = null;
-            $modelField->isNewRecord = true;
+                $modelField->name = $field['name'];
+                $modelField->form_id = $_POST['FormsFields']['form_id'];
+                $modelField->type = $field['type'];
+                $modelField->save();
+                $modelField->id = null;
+                $modelField->isNewRecord = true;
             }
-//            var_dump($modelField->name);die();
             return $this->redirect(Yii::$app->request->referrer);
         }
         return $this->render('view', [

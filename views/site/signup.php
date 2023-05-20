@@ -7,33 +7,37 @@ use yii\helpers\ArrayHelper;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \mdm\admin\models\form\Signup */
 
-$this->title = 'Регистрация';
-$this->params['breadcrumbs'][] = ['label' => 'Сотрудник', 'url' => ['personal/index']];
+$this->title = 'Добавление сотрудника';
+$this->params['breadcrumbs'][] = ['label' => 'Сотрудники', 'url' => ['personal/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
-    <h1>Регистрация нового сотрудника</h1>
 
-    <p>Заполните поля</p>
-    <?= Html::errorSummary($model)?>
-    <?= Html::errorSummary($personal)?>
-    <div class="row">
-	<?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-        <div class="col-lg-5">
-            <?= $form->field($model, 'username')->textInput(['placeholder'=>'Придумайте Ваш логин'])->label('Логин') ?>
-            <?= $form->field($model, 'email')->textInput(['placeholder'=>'Укажите Ваш e-mail']) ?>
-            <?= $form->field($model, 'password')->passwordInput(['placeholder'=>'Придумайте Ваш пароль'])->label('Введите пароль') ?>
-            <?= $form->field($model, 'retypePassword')->passwordInput(['placeholder'=>'Подтвердите Ваш пароль'])->label(false) ?>
+    <div class="card card-outline card-success">
+        <div class="card-header">
+            <h3 class="card-title">Регистрация нового сотрудника</h3>
         </div>
-		<div class="col-lg-5">
-            <?= $form->field($personal, 'firstname')->textInput(['placeholder'=>'Укажите Вашу Фамилию']) ?>
-            <?= $form->field($personal, 'lastname')->textInput(['placeholder'=>'Укажите Ваше имя']) ?>
-            <?= $form->field($personal, 'patronymic')->textInput(['placeholder'=>'Укажите Ваше Отчество']) ?>
+        <div class="card-body">
+            <?= Html::errorSummary($model)?>
+            <?= Html::errorSummary($personal)?>
+            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+                <div class="row">
+                    <div class="col col-md-6">
+                        <?= $form->field($model, 'username')->textInput(['placeholder'=>'Придумайте Ваш логин'])->label('Логин') ?>
+                        <?= $form->field($model, 'email')->textInput(['placeholder'=>'Укажите Ваш e-mail']) ?>
+                        <?= $form->field($model, 'password')->passwordInput(['placeholder'=>'Придумайте Ваш пароль'])->label('Введите пароль') ?>
+                        <?= $form->field($model, 'retypePassword')->passwordInput(['placeholder'=>'Подтвердите Ваш пароль'])->label(false) ?>
+                    </div>
+                    <div class="col col-6">
+                        <?= $form->field($personal, 'firstname')->textInput(['placeholder'=>'Укажите Вашу Фамилию']) ?>
+                        <?= $form->field($personal, 'lastname')->textInput(['placeholder'=>'Укажите Ваше имя']) ?>
+                        <?= $form->field($personal, 'patronymic')->textInput(['placeholder'=>'Укажите Ваше Отчество']) ?>
+                        <?= Html::submitButton('Регистрация', ['class' => 'btn btn-primary']) ?>
+                    </div>
+                </div>
+            <?php ActiveForm::end(); ?>
+        </div>
 
-			 <div class="form-group">
-                <?= Html::submitButton('Регистрация', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-            </div>
-		</div>
-		<?php ActiveForm::end(); ?>
     </div>
+
 </div>

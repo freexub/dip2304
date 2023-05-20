@@ -71,61 +71,46 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php } ?>
                 </div>
             </div>
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
+            <div class="card card-outline card-primary pl-0 pr-0">
+                <div class="card-header">
+
+                    <?= $this->render('_search', ['model' => $searchModel]);?>
+                    <?= GridView::widget([
+                        'dataProvider' => $dataProvider,
 //                'filterModel' => $searchModel,
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-                    [
-                        'format' => 'raw',
-                        'label' => 'Содержимое',
-                        'options' => ['width' => '80%'],
-                        'value' => function($data){
+                        'showHeader' => false,
+                        'summary' => false,
+                        'columns' => [
+                            ['class' => 'yii\grid\SerialColumn'],
+                            [
+                                'format' => 'raw',
+                                'label' => 'Содержимое',
+                                'options' => ['width' => '80%'],
+                                'value' => function($data){
 //                            var_dump((array)json_decode($data->content));die;
-                            return $data->contentData;
-                        }
-                    ],
-                    [
-                        'format' => 'raw',
-                        'label' => 'Тип записи',
-                        'options' => ['width' => '15%'],
-                        'value' => function($data){
-                            return $data->forms->name;
-                        }
-                    ],
-                    [
-                        'format' => 'raw',
+                                    return $data->contentData;
+                                }
+                            ],
+                            [
+                                'format' => 'raw',
+                                'label' => 'Тип записи',
+                                'options' => ['width' => '15%'],
+                                'value' => function($data){
+                                    return $data->forms->name;
+                                }
+                            ],
+                            [
+                                'format' => 'raw',
 //                        'label' => 'Действие',
-                        'options' => ['width' => '5%'],
-                        'value' => function($data){
-                            return Html::a('<span class="fa fa-trash"></span>', ['delete-history', 'id' => $data->id], ['class' => 'btn btn-danger ']);
-                        }
-                    ],
-//                    'forms.name',
-//                    [
-//                        'label' => 'Изображение',
-//                        'options' => ['width' => '50'],
-//                        'format' => 'raw',
-//                        'value' => function ($data) {
-//                            //  var_dump($model); var_dump($key); exit;
-//                            if(empty($data->product->img)){
-//                                $img = '/web/uploads/img/no_photo.gif';
-//                            }else{
-//                                $img = '/web/uploads/img/'.$data->product->img;
-//                            }
-//                            return '<img src="'.$img.'" width="50px">';
-//                        },
-//                    ],
-//                    [
-//                        'label' => false,
-//                        'options' => ['width' => '50'],
-//                        'format' => 'raw',
-//                        'value' => function ($data) {
-//                            return Html::a('Вернуть на склад', ['product/return?id='.$data->product->id.'&pid='.$_GET['id']], ['class' => 'btn btn-success']);
-//                        },
-//                    ],
-                ],
-            ]); ?>
+                                'options' => ['width' => '5%'],
+                                'value' => function($data){
+                                    return Html::a('<span class="fa fa-trash"></span>', ['delete-history', 'id' => $data->id], ['class' => 'btn btn-danger ']);
+                                }
+                            ],
+                        ],
+                    ]); ?>
+                </div>
+            </div>
         </div>
     </div>
 
